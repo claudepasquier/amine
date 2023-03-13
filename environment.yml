@@ -1,0 +1,19 @@
+name: amine-env
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+  - numba
+dependencies:
+  - python=3.6
+  - networkx
+  - scipy
+  - gensim
+  - numba
+  - pandas
+  - xlrd
+  - scikit-learn
+  - powerlaw
+  - progressbar2
+  - openpyxl
+  - python-levenshtein

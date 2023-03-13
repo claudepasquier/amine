@@ -1,0 +1,4 @@
+python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n string -o ./data/results/Hmga2_positive_vs_negative_string_network.xlsx -v
+python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n biogrid -o ./data/results/Hmga2_positive_vs_negative_biogrid_network.xlsx -v 
+python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n intact -o ./data/results/Hmga2_positive_vs_negative_intact_network.xlsx -v 
+python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n ./data/real/ppi/merged_ppi_mouse.txt -o ./data/results/Hmga2_positive_vs_negative_merged_network.xlsx -v
