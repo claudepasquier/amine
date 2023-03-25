@@ -35,26 +35,26 @@ that will download data in the ./data/real/ppi directory
 ## networks
 The downloaded protein-protein interaction networks originating from 3 different databases and concerning 3 different species are described below.
 
-### from String database (https://string-db.org/)
-* human: network of 16812 nodes and 252952 edges
-* mouse: 16633 nodes and 233765 edges
-* drosophila: network of 10634 nodes and 140728 edges
+### from STRING database (https://string-db.org/)
+* human: network of 19,382 nodes and 5,968,679 edges
+* mouse: 21,317 nodes and 7,248,179 edges
+* drosophila: network of 13,047 nodes and 2,171,899 edges
 
 ### from IntAct database (https://www.ebi.ac.uk/intact)
-* human: network of 17721 nodes and 314807 edges
-* mouse: network of 6998 nodes and 18944 edges
-* drosophila: network of 6610 nodes and 29305 edges
+* human: network of 17,721 nodes and 314,807 edges
+* mouse: network of 6,998 nodes and 18,944 edges
+* drosophila: network of 6,610 nodes and 29,305 edges
 
 ### from BioGRID database (https://thebiogrid.org/)
-* human: network of 19892 nodes and 780328 edges
-* mouse: network of 10949 nodes and 60254 edges
-* drosophila: network of 9514 nodes and 64927 edges
+* human: network of 19,892 nodes and 780,328 edges
+* mouse: network of 10,949 nodes and 60,254 edges
+* drosophila: network of 9,514 nodes and 64,927 edges
 
 ### merged networks
-In addition to the interactions networks stored in specific databases, we propose, for each specie, a network that contain a merge of all interactions.
-* for human, this represents a network with 21936 nodes and 1056188 edges
-* for mouse, this represents a network with 18156 nodes and 283649 edges
-* for drosophila, this represents a network with 14412 nodes and 211618 edges
+In addition to the interactions networks stored in specific databases, we propose, for each specie, a network that contains a fusion of all interactions stored in Intact, BioGRID or STRING (for this database, only the interactions associated with a global score >= 0.7 are retained).
+* for human, this represents a network with 21,936 nodes and 1,056,188 edges
+* for mouse, this represents a network with 18,156 nodes and 283,649 edges
+* for drosophila, this represents a network with 14,412 nodes and 211,618 edges
 
 ## Usage
 
@@ -67,7 +67,7 @@ The -h option displays explanations of the available options. A typical executio
 ```bash
 python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n string -o ./data/results/Hmga2_positive_vs_negative_string_network.xlsx -v
 ```
-The command above runs amine on the result of a differential expression analysis stored in the file specified with the parameter **--expvalue**. The parameters **-g**, **-l** and **-p** are used to specify the column with the gene names, the log2 fold changes and the p-values respectively. Numbering starts at 0, which means that zero identifies the first column. The parameter **-s** is used to indicate the specie and the parameter **-n** is used to indicate the origin of the interaction network (in the example, it is the String database). The parameter **-o** allows to specify the path to a file to write the results.
+The command above runs amine on the result of a differential expression analysis stored in the file specified with the parameter **--expvalue**. The parameters **-g**, **-l** and **-p** are used to specify the column with the gene names, the log2 fold changes and the p-values respectively. Numbering starts at 0, which means that zero identifies the first column. The parameter **-s** is used to indicate the specie and the parameter **-n** is used to indicate the origin of the interaction network (in the example, it is the STRING database). The parameter **-o** allows to specify the path to a file to write the results.
 
 The file "execute_reals.sh" contains examples of commands to process data from the paper of Chiou 2017 using different networks.
 
