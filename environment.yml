@@ -17,3 +17,4 @@ dependencies:
   - progressbar2
   - openpyxl
   - python-levenshtein
+  - pyyaml
