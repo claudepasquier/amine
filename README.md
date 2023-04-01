@@ -23,7 +23,7 @@ Alternatively, you can create the environment and install manually the dependenc
 ```bash
 conda create -n amine-env python=3.6
 conda activate amine-env
-conda install -c conda-forge -c anaconda -c numba networkx scipy gensim numba pandas xlrd scikit-learn powerlaw progressbar2 openpyxl python-levenshtein
+conda install -c conda-forge -c anaconda -c numba networkx scipy gensim numba pandas xlrd scikit-learn powerlaw progressbar2 openpyxl python-levenshtein pyyaml
 ```
 
 At this point, you can download network files with the following command:
@@ -61,15 +61,17 @@ In addition to the interactions networks stored in specific databases, we propos
 ### On real data
 The program can be executed with the command:
 ```bash
-python -m amine.process_real_network
+python -m amine
 ```
 The -h option displays explanations of the available options. A typical execution can be performed with:
 ```bash
-python -m amine.process_real_network --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n string -o ./data/results/Hmga2_positive_vs_negative_string_network.xlsx -v
+python -m amine --expvalue ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv -g 0 -l 2 -p 6 -s mouse -n string -o ./data/results/Hmga2_positive_vs_negative_string_network.xlsx -v
 ```
 The command above runs amine on the result of a differential expression analysis stored in the file specified with the parameter **--expvalue**. The parameters **-g**, **-l** and **-p** are used to specify the column with the gene names, the log2 fold changes and the p-values respectively. Numbering starts at 0, which means that zero identifies the first column. The parameter **-s** is used to indicate the specie and the parameter **-n** is used to indicate the origin of the interaction network (in the example, it is the STRING database). The parameter **-o** allows to specify the path to a file to write the results.
 
 The file "execute_reals.sh" contains examples of commands to process data from the paper of Chiou 2017 using different networks.
+
+Other parameters can be used to filter the network to be used by specifying them in the "config.yaml" file.
 
 ### On artificial data
 The method can be executed in batch mode on set of artificially generated datasets with the command:
