@@ -100,14 +100,14 @@ class Datasets:
         """
 
         df = pd.read_csv(Param.get_string_ppi_file(specie)[1], sep=" ", header=0)
-        df = df[df.neighborhood >= min_neighborhood]
-        df = df[df.fusion >= min_fusion]
-        df = df[df.cooccurence >= min_cooccurence]
-        df = df[df.coexpression >= min_coexpression]
-        df = df[df.experimental >= min_experimental]
-        df = df[df.database >= min_database]
-        df = df[df.textmining >= min_textmining]
-        df = df[df.combined_score >= min_combined_score]
+        df = df[df.neighborhood >= min_neighborhood * 1000]
+        df = df[df.fusion >= min_fusion * 1000]
+        df = df[df.cooccurence >= min_cooccurence * 1000]
+        df = df[df.coexpression >= min_coexpression * 1000]
+        df = df[df.experimental >= min_experimental * 1000]
+        df = df[df.database >= min_database * 1000]
+        df = df[df.textmining >= min_textmining * 1000]
+        df = df[df.combined_score >= min_combined_score * 1000]
         columns = list(df.columns)[2:]
         if weight in columns:
             columns = list(set(columns) - set([weight]))
