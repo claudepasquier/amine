@@ -15,15 +15,8 @@
 | Contact: claude.pasquier@univ-cotedazur.fr                                          |
 | Created on decembre 20, 2022                                                        |
 +-------------------------------------------------------------------------------------+
-
-Entry point for the processing of real networks.
-
-Example of call:
-> python process_real_network.py -g 0 -l 2 -p 6 -s mouse \
-    -x ./data/real/expression/chiou_2017/Hmga2_positive_vs_negative.csv
 """
 
-import argparse
 import pathlib
 import sys
 import statistics
@@ -39,119 +32,9 @@ from . import models
 from .parameters import Param
 
 
-def parse_arguments():
-    """Parse arguments."""
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-x",
-        "--expvalue",
-        dest="expvalue_file",
-        type=pathlib.Path,
-        required=True,
-        help="specifies the file with expression values",
-    )
-    parser.add_argument(
-        "-g",
-        "--gene_col",
-        dest="gene_col",
-        type=int,
-        required=True,
-        help=(
-            "specifies the index (in expvalue_file) of the column with gene ids (first"
-            " columns=0)"
-        ),
-    )
-    parser.add_argument(
-        "-l",
-        "--log2fc_col",
-        dest="log2fc_col",
-        type=int,
-        required=False,
-        help=(
-            "specifies the index (in expvalue_file) of the column with log2 fold change"
-            " values (first columns=0)"
-        ),
-    )
-    parser.add_argument(
-        "-p",
-        "--pvalue_col",
-        dest="pvalue_col",
-        type=int,
-        required=False,
-        help=(
-            "specifies the index (in expvalue_file) of the column with pvalues (first"
-            " columns=0)"
-        ),
-    )
-    parser.add_argument(
-        "-a",
-        "--aggreg",
-        dest="aggregation_method",
-        type=str,
-        required=False,
-        choices=["pvalue", "log2fc", "pivalue", "count"],
-        help="specifies the method used to aggregate scores",
-    )
-    parser.add_argument(
-        "-s",
-        "--specie",
-        dest="specie",
-        type=str,
-        required=True,
-        choices=["human", "mouse", "drosophila"],
-        help="specifies the specie",
-    )
-    parser.add_argument(
-        "-f",
-        "--focus",
-        dest="focus_genes_file",
-        type=pathlib.Path,
-        required=False,
-        help="specifies the file with the list of important genes",
-    )
-    parser.add_argument(
-        "-m",
-        "--model",
-        dest="precomputed",
-        required=False,
-        default=False,
-        action="store_true",
-        help="indicates if precomputed model must be used",
-    )
-    parser.add_argument(
-        "-n",
-        "--network",
-        dest="network",
-        type=str,
-        required=True,
-        help="""specifies the network to use.
-                It can be a path to an edge file or a predefined protein-protein
-                interaction network to choose from 'string', 'biogrid' and 'intact'""",
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        dest="output_file",
-        required=False,
-        type=pathlib.Path,
-        help="specifies the name of the output file",
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        dest="verbose",
-        required=False,
-        action="store_true",
-        default=False,
-        help="displays results on screen",
-    )
-    return parser.parse_args()
-
-
 def process(
     expvalue_file: str,
     network: str,
-    nb_modules_to_find: int,
     specie: str,
     gene_col: int,
     log2fc_col: int,
@@ -171,8 +54,6 @@ def process(
     network           : str
                         a path to a network file in edge list format
                         or an item in ['string', 'biogrid', 'intact']
-    nb_modules_to_find: int
-                        maximum number of modules to return
     specie            : str
                         the specie
     gene_col          : int
@@ -280,15 +161,33 @@ def process(
 
     if network == "string":
         G = Datasets.get_ppi_string_graph(
-            specie, min_coexpression=0, min_combined_score=700, weight=1
+            specie,
+            Param.ppi_string_graph["min_neighborhood"],
+            Param.ppi_string_graph["min_fusion"],
+            Param.ppi_string_graph["min_cooccurence"],
+            Param.ppi_string_graph["min_coexpression"],
+            Param.ppi_string_graph["min_experimental"],
+            Param.ppi_string_graph["min_database"],
+            Param.ppi_string_graph["min_textmining"],
+            Param.ppi_string_graph["min_combined_score"],
+            weight=1,
         )
     elif network == "biogrid":
-        G = Datasets.get_ppi_biogrid_graph(specie)
+        G = Datasets.get_ppi_biogrid_graph(
+            specie, Param.ppi_biogrid_graph["inter_type"]
+        )
     elif network == "intact":
-        G = Datasets.get_ppi_intact_graph(specie)
+        G = Datasets.get_ppi_intact_graph(
+            specie, Param.ppi_intact_graph["min_confidence"]
+        )
     else:
         try:
-            G = Datasets.get_custom_graph(network)
+            G = Datasets.get_custom_graph(
+                network,
+                Param.ppi_custom_graph["source_col"],
+                Param.ppi_custom_graph["target_col"],
+                Param.ppi_custom_graph["header"],
+            )
         except AmineException as e:
             print(e.args)
             sys.exit(1)
@@ -533,7 +432,7 @@ def process(
             )
 
     out = []
-    for ctr in range(min(len(results), nb_modules_to_find)):
+    for ctr in range(len(results)):
         if Param.verbose:
             print(
                 "{},{},{},{}".format(
@@ -552,23 +451,3 @@ def process(
         out.append(module)
 
     return out
-
-
-if __name__ == "__main__":
-    # Entry point
-    arg = parse_arguments()
-    Param.verbose = arg.verbose
-    # Datasets.init_go_resources(arg.specie)
-    modules = process(
-        arg.expvalue_file,
-        arg.network,
-        1000,
-        arg.specie,
-        arg.gene_col,
-        arg.log2fc_col,
-        arg.pvalue_col,
-        arg.output_file,
-        arg.focus_genes_file,
-        arg.aggregation_method,
-        arg.precomputed,
-    )
