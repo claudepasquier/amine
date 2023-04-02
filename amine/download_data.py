@@ -21,6 +21,7 @@ Script used to import data
 
 import urllib.request
 import progressbar
+import yaml
 from .parameters import Param
 
 
