@@ -32,7 +32,6 @@ class Param:
     # version of the BioGRID database
     biogrid_version = "4.4.216"
 
-
     # Directory where the datasets are stored
     # by default it is the directory named data on the project root directory
     datadir = pathlib.Path(pathlib.Path(__file__).parent.parent, "data")
@@ -59,35 +58,39 @@ class Param:
     # Filters to be applied to the STRING database
     # this correspond to the different composants of the evidence score
     #
-    ppi_string_graph ={
-        "min_neighborhood": 0,   "min_fusion": 0, "min_cooccurence" : 0,
-        "min_coexpression": 0, "min_experimental": 0, "min_database" : 0,
-        "min_textmining": 0, "min_combined_score" : 0}
+    ppi_string_graph = {
+        "min_neighborhood": 0,
+        "min_fusion": 0,
+        "min_cooccurence": 0,
+        "min_coexpression": 0,
+        "min_experimental": 0,
+        "min_database": 0,
+        "min_textmining": 0,
+        "min_combined_score": 0.7,
+    }
 
     #
     # Filter to be applied to the BioGRID database
     # There is only one choice, corresponding to the type of interaction
     # that can be 'physical', 'genetic' or None is no filter is used
     #
-    ppi_biogrid_graph ={
-        "inter_type": None}
+    ppi_biogrid_graph = {"inter_type": None}
 
     #
     # Filter to be applied to the Intact database
     # This correspond to the minimum confidence score
     #
-    ppi_intact_graph = {
-        "min_confidence": 0.0}
+    ppi_intact_graph = {"min_confidence": 0.0}
 
     #
     # Parameters and Filter to be used when reading a custom graph in edgelist format
     #
-    ppi_custom_graph ={
+    ppi_custom_graph = {
         "path": None,
         "source_col": 0,
         "target_col": 1,
-        "header": None # Row number to use as the column names    
-        }
+        "header": None,  # Row number to use as the column names
+    }
 
     verbose = False
 
