@@ -71,6 +71,19 @@ class ProgressBar:
             self.pbar.finish()
 
 
+# Load the program parameters from the 'config.yaml' file if it exists
+try:
+    with open("config.yaml", "r") as f:
+        params = yaml.safe_load(f)
+    for key, value in params.items():
+        setattr(Param, key, value)
+    print("Parameters read from 'config.yaml' file.")
+except yaml.YAMLError:
+    print("Problem occured when reading 'config.yaml'.")
+    print("Using default parameters.")
+except FileNotFoundError:
+    pass
+
 print("Downloading files")
 
 # String
