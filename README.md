@@ -2,7 +2,7 @@
 
 Implementation of the active module identification method described in the manuscript:
 
->Pasquier, C., Guerlais, V., Pallez, D., Rapetti-Mauss, R., & Soriani, O. (2021). Identification of active modules in interaction networks using node2vec network embedding. BioRxiv.*
+>A network embedding approach to identify active modules in biological interaction networks. C Pasquier, V Guerlais, D Pallez, R Rapetti-Mauss, O Soriani. Life Science Alliance 6 (9).
 
 ## Installation
 
