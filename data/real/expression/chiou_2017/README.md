@@ -53,19 +53,19 @@ The file **GSE90625_all_counts_InVitro.txt.gz**, downloaded from [OmicsDI websit
 ## 2 - differential expression analysis of GSE90824
 
 The file **GSE90824_All_ExVivo_counts.txt.gz**, downloaded from [OmicsDI website(https://www.omicsdi.org/) contains the read counts of 31468 transcripts in 12 samples.
-* X0784.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 0784
-* X2317.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2317
-* X2518.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2518
-* X2542.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2542
-* X2689.G.T: purified EpCAM-negative GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2689
-* X2691.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2691
-* X0784.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 0784
-* X2317.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2317
-* X2518.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2518
-* X2542.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2542
-* X2689.G.T..1: purified EpCAM-negative GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2689
-* X2691.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2691
- 
+* X0784.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 0784 (column 0784-P)
+* X2317.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2317 (column 2317-G+T+)
+* X2518.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2518 (column 2518-G+T+)
+* X2542.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2542 (column 2542-LNM)
+* X2689.G.T: purified EpCAM-negative GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2689 (column 2689-G+T+)
+* X2691.G.T: purified GFP/Hmga2-positive Tomato-positive PDAC cancer cells from mouse 2691 (column 2691-SM)
+* X0784.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 0784 (column 0784-G+T+)
+* X2317.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2317 (column 2317-G-T+)
+* X2518.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2518 (column 2518-G-T+)
+* X2542.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2542 (column 2542-LM)
+* X2689.G.T..1: purified EpCAM-negative GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2689 (column 2689-G-T+)
+* X2691.G.T..1: purified GFP/Hmga2-negative Tomato-positive PDAC cancer cells from mouse 2691 (column 2691-LNM)
+
 ### 1.2 - Hmga2_positive_vs_negative
   
 #### Input onditions:
