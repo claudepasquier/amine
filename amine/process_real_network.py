@@ -391,7 +391,7 @@ def process(
                 groups_output_file, "w"
             ) as outfile_groups:
                 outfile.write("module_nb, genes, s score,pvalue\n")
-                for ctr, result in enumerate(result):
+                for ctr, result in enumerate(results):
                     outfile.write(
                         "{},{},{},{}\n".format(
                             ctr + 1,
